@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Vue.js</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js" defer></script>
+    <style>
+        body{
+            background: #c2cdff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        button {
+            padding: 10px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 7px;
+            color: #ffffff;
+            background: #031e94;
+            cursor: pointer;
+        }
+        .box {
+            width: 400px;
+            padding: 100px;
+            background: #031e94;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            display: inline-block;
+            border-radius: 10px;
+            color: #ffffff;
+            margin: 20px;
+        }
+        a {
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 4px;
+            background: #3b0674;
+            color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        ul li {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 30%;
+            background: #8097ff;
+            color: #ffffff;
+            border-radius: 7px;
+            padding: 15px;
+        }
+        li.fav {
+            background: #97ca97;
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        h4 {
+            color: #031e94;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Vue.js</h1>
+
+    <div id="app">
+        <a :href="url">GitHub</a>
+
+        <div v-if="showBooks">
+            <ul>
+                <li v-for="thing in books" :class="{fav: thing.isFav}" @click="favOrNot(thing)">
+                    <img :src="thing.img" :alt="thing.title">
+                    <h3>{{thing.title}}</h3>
+                    <p>{{thing.author}}</p>
+                </li>
+            </ul>
+            <h4>{{favTitle}}</h4>
+            <ul>
+                <li v-for="thing in filteredBooks" :class="{fav: thing.isFav}" @click="favOrNot(thing)">
+                    <img :src="thing.img" :alt="thing.title">
+                    <h3>{{thing.title}}</h3>
+                    <p>{{thing.author}}</p>
+                </li>
+            </ul>
+        </div>
+        <button @click="toggleBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+        <button @click="age++">Increase Age</button>
+        <button @click="age--">Decrease Age</button>
+        <div @click.right="changeTitle('Oath Bringer')">Change title</div>
+
+        <div v-show="showBooks">
+            Currently showing books
+        </div>
+        <br>
+        <hr>
+        <div class="box" @mouseover="handleEvents($event, 'automatic')">Mouse Over</div>
+        <div class="box" @mouseleave="handleEvents">Mouse Leave</div>
+        <div class="box" @dblclick="handleEvents">Double Click</div>
+        <div class="box" @mousemove="handleMouseMove"> Positio x - {{x}} y - {{y}}</div>
+
+        <br>
+        <hr>
+
+    </div>
+</body>
+</html>
